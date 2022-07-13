@@ -3,6 +3,7 @@ let { MessageType } = (await import('@adiwajshing/baileys')).default
 let wibu = flaaa.getRandom()
 let thumb = await(await fetch(wibu + 'Shop')).buffer()
 const potion = 500
+const limit = 2500
 const Sgold = 3000
 const Bgold = 6000
 const Bstring = 500
@@ -92,27 +93,28 @@ bila sudah tidak ada harganya, berarti sudah tidak bisa dibeli / sudah level max
 │» *♻ Barang   | 💲 Harga beli*
 ⛊━━━┄┄┄┄┄┄┄┄┄━━━⛊
 │» *🥤 Potion:* ${potion}
-*🍶 Aqua:* ${Baqua}
-│» *🪙  Gold :* ${Bgold}
-*💎 Diamond:* ${Bdiamond}
-│» *🪨 Batu:* ${Bbatu}
-*🪵 Kayu:* ${Bkayu}
-│» *🕸️ String:* ${Bstring}
-*⛓️ Iron:* ${Biron}
-│» *🗑️ Sampah:* ${Bsampah}
-*📦 Common:* ${Bcommon} 
-│» *🛍️ Uncommon:* ${Buncommon}
-*🎁 Mythic:* ${Bmythic}
-│» *🧰 Legendary:* ${Blegendary}
-*📫 Pet:* ${Bpet}
-│» *🥼 Armor:* ${armor}
-*🎣 Fishingrod:* ${pancing}
-│» *🪱 Umpan:* ${Bumpan}
-*🌾 Bibit mangga:* ${Bjagung}
-│» *🌾 Bibit apel:* ${Bapel}
-*🌾 Bibit jeruk:* ${Bjeruk}
-│» *🌾 Bibit pisang:* ${Bapel}
-*🌾 Bibit anggur:* ${Banggur}
+* *🌌 Limit:* ${limit}
+│» *🍶 Aqua:* ${Baqua}
+* *🪙  Gold :* ${Bgold}
+│» *💎 Diamond:* ${Bdiamond}
+* *🪨 Batu:* ${Bbatu}
+│» *🪵 Kayu:* ${Bkayu}
+* *🕸️ String:* ${Bstring}
+│» *⛓️ Iron:* ${Biron}
+* *🗑️ Sampah:* ${Bsampah}
+│» *📦 Common:* ${Bcommon} 
+* *🛍️ Uncommon:* ${Buncommon}
+│» *🎁 Mythic:* ${Bmythic}
+* *🧰 Legendary:* ${Blegendary}
+│» *📫 Pet:* ${Bpet}
+* *🥼 Armor:* ${armor}
+│» *🎣 Fishingrod:* ${pancing}
+* *🪱 Umpan:* ${Bumpan}
+│» *🌾 Bibit mangga:* ${Bjagung}
+* *🌾 Bibit apel:* ${Bapel}
+│» *🌾 Bibit jeruk:* ${Bjeruk}
+* *🌾 Bibit pisang:* ${Bapel}
+│» *🌾 Bibit anggur:* ${Banggur}
 ⛊━━━┄┄┄┄┄┄┄┄┄━━━⛊
 │» *♻ Barang   | 💲 Harga Jual*
 ⛊━━━┄┄┄┄┄┄┄┄┄━━━⛊
@@ -271,6 +273,13 @@ bila sudah tidak ada harganya, berarti sudah tidak bisa dibeli / sudah level max
                                 global.db.data.users[m.sender].potion += count * 1
                                 conn.reply(m.chat, `✔️ Sukses Membeli ${count} Potion 🥤 Dengan Harga ${potion * count} money 💹\n\n📍 Gunakan Potion Dengan Ketik: *${usedPrefix}use potion <jumlah>*`, m)
                             } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Potion Dengan Harga ${potion * count} Money `,)
+                        break
+                    case 'limit':
+                           if (global.db.data.users[m.sender].money >= limit * count) {
+                               global.db.data.users[m.sender].money -= limit * count
+                               global.db.data.users[m.sender].limit += count * 1
+                               conn.reply(m.chat, `✔️ Sukses Membeli ${count} Limit 🌌 Dengan Harga ${limit * count} money 💹
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Limit Dengan Harga ${limit * count} Money `,)
                         break
                     case `gold`:
                             if (global.db.data.users[m.sender].money >= Bgold * count) {
@@ -719,8 +728,14 @@ bila sudah tidak ada harganya, berarti sudah tidak bisa dibeli / sudah level max
                             global.db.data.users[m.sender].potion += count * 1
                             conn.reply(m.chat, `Sukses membeli ${count} Potion Dengan Harga ${potion * count} Money \n\nGunakan Potion Dengan Ketik: *${usedPrefix}use potion <jumlah>*`, m)
                         } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Potion Dengan Harga ${potion * count} Money`,m)
-                    
                     break
+                case 'limit':
+                           if (global.db.data.users[m.sender].money >= limit * count) {
+                               global.db.data.users[m.sender].money -= limit * count
+                               global.db.data.users[m.sender].limit += count * 1
+                               conn.reply(m.chat, `✔️ Sukses Membeli ${count} Limit 🌌 Dengan Harga ${limit * count} money 💹
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Limit Dengan Harga ${limit * count} Money `,)
+                        break
                 case 'tprem':
                             if (global.db.data.users[m.sender].money >= Btprem * count) {
                                 global.db.data.users[m.sender].tprem += count * 1
